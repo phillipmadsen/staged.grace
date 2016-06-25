@@ -69,6 +69,7 @@
         <script type="text/javascript" src="{!! asset('ckeditor/ckeditor.js') !!}"></script>
         <script type="text/javascript" src="{!! asset('assets/bootstrap/js/bootstrap-tagsinput.js') !!}"></script>
         <script type="text/javascript" src="{!! asset('assets/js/jquery.slug.js') !!}"></script>
+           {!! HTML::script('assets/bootstrap/js/bootstrap-tagsinput.js') !!}
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
        <script type="text/javascript">
         window.onload = function () {

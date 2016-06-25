@@ -206,4 +206,13 @@ class UserController extends Controller
 
         return view('backend.user.confirm-destroy', compact('user'))->with('active', 'user');
     }
+
+
+	public function lists()
+	{
+		//$user = Sentinel::findUserById($id);
+		//$users = User::orderBy('title', 'id')->list()->get();
+
+		return $this->user->get()->where('lang', $this->getLang())->lists('title', 'id');
+	}
 }

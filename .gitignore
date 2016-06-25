@@ -25,3 +25,5 @@ Homestead.json
 /tests/
 /screenshots
 .*
+*.jpg
+*.png

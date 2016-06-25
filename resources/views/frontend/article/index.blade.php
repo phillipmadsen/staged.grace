@@ -117,8 +117,8 @@ rows
                             </a>
                             @else
 
-                            <img class="image_fade" src="http://lorempixel.com/800/350/abstract/" style="border: 1px solid #bdc3c7;" alt="{!! $article->title !!} image" itemprop="image" />
-
+                            <img class="image_fade" src="http://www.placehold.it/860x400/EFEFEF/AAAAAA?text=no+image" style="border: 1px solid #bdc3c7;" alt="{!! $article->title !!} image" itemprop="image" />
+ 
                             @endif
                         </div>
                         <div class="entry-title">

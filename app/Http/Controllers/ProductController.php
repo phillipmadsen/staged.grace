@@ -21,11 +21,11 @@ use Fully\Models\ProductFeature;
 use Fully\Models\Product;
 use Fully\Models\User;
 
- 
+
 
 class ProductController extends AppBaseController
 {
- 
+
     private $productRepository;
     private $model;
     private $user;
@@ -82,7 +82,7 @@ class ProductController extends AppBaseController
     public function store(CreateProductRequest $request)
     {
         $input = $request->all();
-        
+
 
         if ($request->hasFile('product_image_file'))
         {
@@ -196,9 +196,9 @@ class ProductController extends AppBaseController
             Flash::error('Product not found');
             return redirect(route('admin.products.index'));
         }
-        
+
         $product->update($request->except('attribute_name', 'product_attribute_value', 'product_image_file', 'feature_name'));
-        
+
         if (!empty($request->attribute_name))
         {
             foreach ($request->attribute_name as $key => $item)
@@ -209,7 +209,7 @@ class ProductController extends AppBaseController
                 $product->productVariants()->save($productVariant);
             }
         }
-        
+
         if (!empty($request->feature_name))
         {
             foreach ($request->feature_name as $feature)
@@ -282,7 +282,7 @@ class ProductController extends AppBaseController
         }
         return $features;
     }
-    
+
         /**
      * @param $file
      */
@@ -292,7 +292,7 @@ class ProductController extends AppBaseController
         $thumbPath = $file->getPath() . '/thumb_' . $file->getFilename();
         Thumbnail::generate_image_thumbnail($sourcePath, $thumbPath);
     }
-    
+
     /**
      * @param $id
      * @return mixed
@@ -301,4 +301,10 @@ class ProductController extends AppBaseController
     {
         return $this->product->togglePublish($id);
     }
+
+	public function lists()
+	{
+	//	return $this->product->get()->where('lang', $this->getLang())->lists('title', 'id');
+	}
+
 }

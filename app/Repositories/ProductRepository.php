@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ProductRepository extends BaseRepository
 {
 
-    
+
 
     protected $fieldSearchable = [
         'slug',
@@ -53,7 +53,7 @@ class ProductRepository extends BaseRepository
         $picture = $slug . "." . $extension;
         return $file->move($destinationPath, $picture);
       }
- 
+
 
 
 
@@ -88,7 +88,7 @@ class ProductRepository extends BaseRepository
     //         //     $category = Category::find($attributes['category']);
     //         //     $category->products()->save($this->product);
     //         // }
-    //         //Event::fire('article.created', $this->article);
+    //         //Event::fire('product.created', $this->product);
     //         Event::fire('product.creating', $this->product);
     //         return true;
     //     }
@@ -99,7 +99,20 @@ class ProductRepository extends BaseRepository
 
 
 
+	/**
+	 * @param $id
+	 *
+	 * @return mixed
+	 */
+	public function togglePublish($id)
+	{
+		$product = $this->product->find($id);
 
+		$product->is_published = ($product->is_published) ? false : true;
+		$product->save();
+
+		return Response::json(array('result' => 'success', 'changed' => ($product->is_published) ? 1 : 0));
+	}
 
 
 }

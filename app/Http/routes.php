@@ -47,8 +47,6 @@ Route::group(['prefix' => LaravelLocalization::getCurrentLocale(), 'before' => [
     // frontend dashboard
     Route::get('/', ['as' => 'dashboard', 'uses' => 'HomeController@index']);
 
-
-
     // article
     Route::get('/community/blog', ['as' => 'dashboard.article', 'uses' => 'ArticleController@index']);
     Route::get('/community/blog/{slug}', ['as' => 'dashboard.article.show', 'uses' => 'ArticleController@show']);

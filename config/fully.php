@@ -39,8 +39,8 @@ return [
         'article' => [
 
              'image_size' => [
-                'width'  => 730,
-                'height' => 290
+                'width'  => 1140,
+                'height' => 600
             ],
             'in_content_img' => [
                 'width'  => 400,

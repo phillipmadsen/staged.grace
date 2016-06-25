@@ -6,14 +6,14 @@
                         <li> <a data-toggle="tab" href="#panel_tab_social"> SOCIAL </a> </li>
 
                         <li>&nbsp;</li>
-                        <li>{!! Form::submit('Update', ['class' => 'btn btn-primary btn-squared']) !!}</li>
+                        {{-- <li>{!! Form::submit('Update', ['class' => 'btn btn-primary btn-squared']) !!}</li> --}}
                         <li> <a href="{!! url('admin.pages.index') !!}" class="btn btn-default btn-squared">Cancel</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="panel_tab_article_content" class="tab-pane active">
                             <div class="container-fluid">
                                 <div class="row-fluid">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
 
 
                             {{--             <!-- Image -->
@@ -25,7 +25,7 @@
                                         </div>
                                         <hr /> --}}
 
-  <!-- Tag -->
+ {{--  <!-- Tag -->
     <div class="col-md-4 control-group {!! $errors->has('tag') ? 'has-error' : '' !!}">
         <label class="control-label" for="title">Tag</label>
 
@@ -36,14 +36,14 @@
             @endif
         </div>
     </div>
-
+ --}}
 
 
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-6">
                                         <div class="row">
 
-
+{{--
                                             <!-- Category -->
                                             <div class="col-md-3 control-group {!! $errors->has('category') ? 'error' : '' !!}">
                                                 <label class="control-label" for="title">Category</label>
@@ -53,12 +53,17 @@
                                                     <span class="help-block">{!! $errors->first('category') !!}</span>
                                                     @endif
                                                 </div>
-                                            </div>
+                                            </div> --}}
+
+
 	                                        <!-- Author Id Field -->
-	                                        <div class="form-group col-sm-3">
-		                                        {!! Form::label('author_id', 'Author:') !!}
-		                                        {!! Form::select('user', $users, null, array('class' => 'form-control', 'value'=>Input::old('user'))) !!}
-	                                        </div>
+{{--<div class="form-group col-sm-3">--}}
+    {{--{!! Form::label('user_id', 'Author:') !!}--}}
+    {{--{!! Form::select('user', $users, null, array('class' => 'form-control', 'value'=>Input::old('user'))) !!}--}}
+{{--{{ Form::select('users', Fully\Models\User::where('user_id', '=', $article->id)->lists('name', 'id')), $users, array('class' => 'form-control') }}--}}
+
+{{--</div>--}}
+
 
 	                                        <!-- Published -->
                                             <!-- 'bootstrap / Toggle Switch is_published Field' -->
@@ -95,7 +100,7 @@
                                             <!-- Excerpt Field -->
                                             <div class="form-group ">
                                                 {!! Form::label('excerpt', 'Excerpt:') !!}
-                                                {!! Form::textarea('excerpt', null, ['class' => 'form-control', 'rows' => '5']) !!}
+                                                {!! Form::textarea('excerpt',null, ['class' => 'form-control', 'rows' => '5', 'value'=>Input::old('excerpt')]) !!}
                                             </div>
 
                                         </div>
@@ -104,7 +109,7 @@
                                             <!-- Content Field -->
                                             <div class="form-group col-sm-12 col-lg-12 {!! $errors->has('content') ? 'has-error' : '' !!}" style="    visibility: visible;">
                                                 {!! Form::label('content', 'Content:') !!}
-                                                {!! Form::textarea('content', null, [ 'class' => 'form-control', 'placeholder'=>'Main Content Goes Here...', 'value'=>Input::old('content'), 'rows' => '30']) !!}
+                                                {!! Form::textarea('content', null, [ 'class' => 'form-control summernote', 'value'=>Input::old('content'), 'rows' => '30']) !!}
                                                 @if ($errors->first('content'))
                                                 <span class="help-block">{!! $errors->first('content') !!}</span>
                                                 @endif
@@ -119,7 +124,26 @@
 
 
 
+{{--
 
+	                                <div class="fileinput fileinput-new control-group {!! $errors->has('image') ? 'has-error' : '' !!}" data-provides="fileinput">
+		                                <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+		                                <div>
+			                                <span class="btn btn-default btn-file">
+				                                <span class="fileinput-new">Select image</span>
+				                                <span class="fileinput-exists">Change</span>
+				                                {!! Form::file('image', null, array('class'=>'form-control', 'id' => 'image', 'placeholder'=>'Image', 'value'=>Input::old('image'))) !!}
+				                                @if ($errors->first('image'))
+					                                <span class="help-block">{!! $errors->first('image') !!}</span>
+				                                @endif </span>
+			                                <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> </div>
+	                                </div>
+	                                <br> --}}
+{{-- 2000 x 1324 pixels
+1258 x 833 pixels
+860 x 570 pixels --}}
+
+	                                <h2>{!! $article->title !!}}</h2>
 
         <div class="form-group">
             <div class="col-sm-12 ">
@@ -129,12 +153,11 @@
                 <div class="fileupload fileupload-new  control-group {!! $errors->has('image') ? 'has-error' : '' !!}" data-provides="fileupload">
                     <div class="fileupload-new thumbnail" style="width: 1140px; height: 600px;">
 
-<img data-src="" {!! (($article->path) ? "src='".url($article->path)."'" : '<img src="http://www.placehold.it/1140x600/EFEFEF/AAAAAA?text=no+image" alt=""/>') !!} alt="...">
                     </div>
                     <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 1140px; max-height: 600px; line-height: 20px;"></div>
                     <div>
                         <span class="btn btn-light-grey btn-file"><span class="fileupload-new"><i class="fa fa-picture-o"></i> Select image</span><span class="fileupload-exists"><i class="fa fa-picture-o"></i> Change</span>
-                            {!! Form::file('image', null, ['class'=>'form-control', 'id' => 'image', 'placeholder'=>'Image', 'files'=>true, 'value'=>Input::old('image')]) !!}
+                            {!! Form::file('image', null, ['class'=>'form-control', 'id' => 'image', 'files'=>true, 'value'=>Input::old('image')]) !!}
                         </span>
                         <a href="#" class="btn fileupload-exists btn-light-grey" data-dismiss="fileupload">
                             <i class="fa fa-times"></i> Remove
@@ -146,20 +169,17 @@
         </div>
 
 
+                                        <hr />
 
-<!-- Path Field -->
-<div class="form-group col-sm-6 hidden">
-    {!! Form::label('path', 'Path:') !!}
-    {!! Form::text('path', null, ['class' => 'form-control']) !!}
-</div>
+
+
+    {!! Form::text('path', null, ['class' => 'form-control hidden']) !!}
+
 
 <div class="clearfix"></div>
 
-<!-- File Size Field -->
-<div class="form-group col-sm-6 hidden">
-    {!! Form::label('file_size', 'File Size:') !!}
-    {!! Form::number('file_size', null, ['class' => 'form-control']) !!}
-</div>
+    {!! Form::number('file_size', null, ['class' => 'form-control hidden']) !!}
+
 
 
                         </div>

@@ -189,13 +189,12 @@ class ArticleRepository extends RepositoryAbstract implements ArticleInterface, 
 
             //--------------------------------------------------------
 
-            $this->article->lang = $this->getLang();
-            if ($this->article->fill($attributes)->save()) {
-                $category = Category::find($attributes['category']);
-                $category->articles()->save($this->article);
-            }
-
-            $articleTags = explode(',', $attributes['tag']);
+	        $this->article->lang = $this->getLang();
+	        if ($this->article->fill($attributes)->save()) {
+		        $category = Category::find($attributes['category']);
+		        $category->articles()->save($this->article);
+	        }
+	        $articleTags = explode(',', $attributes['tag']);
 
             foreach ($articleTags as $articleTag) {
                 if (!$articleTag) {
@@ -234,6 +233,8 @@ class ArticleRepository extends RepositoryAbstract implements ArticleInterface, 
      */
     public function update($id, $attributes)
     {
+
+
         $this->article = $this->find($id);
         $attributes['is_published'] = isset($attributes['is_published']) ? true : false;
 
@@ -269,15 +270,14 @@ class ArticleRepository extends RepositoryAbstract implements ArticleInterface, 
             }
             //-------------------------------------------------------
 
-            if ($this->article->fill($attributes)->save()) {
-                $this->article->resluggify();
-                $category = Category::find($attributes['category']);
-                $category->articles()->save($this->article);
-            }
+	        if ($this->article->fill($attributes)->save()) {
+		        $this->article->resluggify();
+		        $category = Category::find($attributes['category']);
+		        $category->articles()->save($this->article);
+	        }
+	        $articleTags = explode(',', $attributes['tag']);
 
-            $articleTags = explode(',', $attributes['tag']);
-
-            foreach ($articleTags as $articleTag) {
+	        foreach ($articleTags as $articleTag) {
                 if (!$articleTag) {
                     continue;
                 }
@@ -293,6 +293,8 @@ class ArticleRepository extends RepositoryAbstract implements ArticleInterface, 
                 //$tag->slug = Str::slug($articleTag);
                 $this->article->tags()->save($tag);
             }
+
+	        //dd($attributes);
 
             return true;
         }

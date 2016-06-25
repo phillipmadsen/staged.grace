@@ -10,7 +10,7 @@ Grace Manager
 * Bootstrap
 * Authentication Sentinel
 * Ckeditor
-* summertime editor
+* summernote editor
 * Bootstrap Code Prettify
 * File Manager
 * Dropzone.js

@@ -92,6 +92,7 @@ class ArticleController extends Controller
     {
         try {
             $this->article->create(Input::all());
+
             Flash::message('Article was successfully added');
 
             return langRedirectRoute('admin.article.index');
@@ -121,23 +122,43 @@ class ArticleController extends Controller
      * @param  int        $id
      * @return Response
      */
-    public function edit($id)
-    {
-        $article = $this->article->find($id);
-        $users   = User::select(DB::raw('concat(first_name," ",last_name) as full_name,id'))->lists('full_name', 'id');
+	public function edit($id)
+	{
+		$article = $this->article->find($id);
+		//$user = $article->getUsers()->lists('name', 'id')->all();
+		//$category = Category::lists('title', 'id');
 
-        $tags = null;
+		//$users   = User::select(DB::raw('concat(first_name," ",last_name) as full_name,id'))->lists('full_name', 'id');
+		$tags = null;
+		foreach ($article->tags as $tag) {
+			$tags .= ','.$tag->name;
+		}
+		$tags = substr($tags, 1);
 
-        foreach ($article->tags as $tag)
-        {
-            $tags .= ',' . $tag->name;
-        }
+		$users = $this->user->lists();
+		$categories = $this->category->lists();
 
-        $tags       = substr($tags, 1);
-        $categories = $this->category->lists();
+		return view('backend.article.edit', compact('article', 'tags', 'categories', 'users'));
+	}
 
-        return view('backend.article.edit', compact('article', 'tags', 'categories', 'users'));
-    }
+
+	//public function edit($id)
+    //{
+    //    $article = $this->article->find($id);
+    //    //$users   = User::select(DB::raw('concat(first_name," ",last_name) as full_name,id'))->lists('full_name', 'id');
+    //
+    //    $tags = null;
+
+        //foreach ($article->tags as $tag)
+        //{
+        //    $tags .= ',' . $tag->name;
+        //}
+        //
+        //$tags       = substr($tags, 1);
+        //$categories = $this->category->lists();
+
+    //    return view('backend.article.edit', compact('article', 'tags', 'categories', 'users'));
+    //}
 
     /**
      * Update the specified resource in storage.

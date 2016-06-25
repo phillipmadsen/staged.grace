@@ -44,7 +44,7 @@
                 <div class="panel-body">
                 {!! Form::model($article, ['route' => [getLang(). '.admin.article.update', $article->id], 'method' => 'PATCH', 'files'=>true]) !!}
                     @include('backend.article.fields')
-                     {!! Form::submit('Update', array('class' => 'btn btn-success')) !!}
+                    {!! Form::submit('Update', array('class' => 'btn btn-success')) !!}
                 {!! Form::close() !!}
                 <!-- end: PANLEL TABS -->
                 </div>
@@ -65,6 +65,7 @@
         };
     </script>
 @endsection
+
 @section('clipinline')
-TableData.init();
+{{-- TableData.init(); --}}
 @endsection

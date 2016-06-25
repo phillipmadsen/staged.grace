@@ -97,23 +97,22 @@ itemscope itemtype="http://schema.org/Product"
                                                     @endif
 
 
-
-
+ 
 
                                                 @else
-                                                    <div class="slide" data-thumb="http://placehold.it/413" aria-hidden="true" style="width: 413px; float: left; display: block;">
-                                                        <a href="http://placehold.it/720x960?text=image+one" title="{!! $product->name !!}" data-lightbox="">
-                                                            <img src="http://placehold.it/720x960?text=image+one" alt="{!! $product->name !!} image" draggable="false">
+                                                    <div class="slide" data-thumb="http://placehold.it/413/2851CC/ffffff" aria-hidden="true" style="width: 413px; float: left; display: block;">
+                                                        <a href="http://placehold.it/720x960/2851CC/ffffff?text=image+one" title="{!! $product->name !!}" data-lightbox="">
+                                                            <img src="http://placehold.it/720x960/2851CC/ffffff?text=image+one" alt="{!! $product->name !!} image" draggable="false">
                                                         </a>
                                                     </div>
-                                                     <div class="slide" data-thumb="http://placehold.it/413" aria-hidden="true" style="width: 413px; float: left; display: block;">
-                                                        <a href="http://placehold.it/720x960?text=image+two" title="{!! $product->name !!}" data-lightbox="">
-                                                            <img src="http://placehold.it/720x960?text=image+two" alt="{!! $product->name !!} image" draggable="false">
+                                                     <div class="slide" data-thumb="http://placehold.it/413/AF2323/ffffff" aria-hidden="true" style="width: 413px; float: left; display: block;">
+                                                        <a href="http://placehold.it/720x960/AF2323/ffffff?text=image+two" title="{!! $product->name !!}" data-lightbox="">
+                                                            <img src="http://placehold.it/720x960/AF2323/ffffff?text=image+two" alt="{!! $product->name !!} image" draggable="false">
                                                         </a>
                                                     </div>
-                                                    <div class="slide" data-thumb="http://placehold.it/413" aria-hidden="true" style="width: 413px; float: left; display: block;">
-                                                        <a href="http://placehold.it/720x960?text=image+three" title="{!! $product->name !!}" data-lightbox="">
-                                                            <img src="http://placehold.it/720x960?text=image+three" alt="{!! $product->name !!} image" draggable="false">
+                                                    <div class="slide" data-thumb="http://placehold.it/413/468B4E/FFFFFF" aria-hidden="true" style="width: 413px; float: left; display: block;">
+                                                        <a href="http://placehold.it/720x960/468B4E/FFFFFF?text=image+three" title="{!! $product->name !!}" data-lightbox="">
+                                                            <img src="http://placehold.it/720x960/468B4E/FFFFFF?text=image+three" alt="{!! $product->name !!} image" draggable="false">
                                                         </a>
                                                     </div>
                                                 @endif
