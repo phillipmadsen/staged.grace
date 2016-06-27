@@ -12,10 +12,10 @@ include 'new_routes.php';
 |--------------------------------------------------------------------------
  */
 
-//Route::model('article', 'App\Models\Article');
-// Route::model('product', 'App\Models\product');
-// Route::pattern('slug', '[a-z0-9- _]+');
-
+Route::model('article', 'App\Models\Article');
+Route::model('product', 'App\Models\product');
+Route::pattern('slug', '[a-z0-9- _]+');
+ // en/admin/products/{products}/edit
 /*
 |--------------------------------------------------------------------------
 | Frontend Routes

@@ -6,6 +6,7 @@ use Flash;
 use Fully\Exceptions\Validation\ValidationException;
 use Fully\Http\Controllers\Controller;
 use Fully\Models\User;
+// use Fully\Models\Article;
 use Fully\Repositories\Article\ArticleInterface;
 use Fully\Repositories\Article\ArticleRepository as Article;
 use Fully\Repositories\Category\CategoryInterface;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Input;
 use Response;
 use View;
+
 
 /**
  * Class ArticleController.
@@ -127,6 +129,7 @@ class ArticleController extends Controller
 		$article = $this->article->find($id);
 		//$user = $article->getUsers()->lists('name', 'id')->all();
 		//$category = Category::lists('title', 'id');
+        $categories = $this->category->lists();
 
 		//$users   = User::select(DB::raw('concat(first_name," ",last_name) as full_name,id'))->lists('full_name', 'id');
 		$tags = null;

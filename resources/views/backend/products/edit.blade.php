@@ -45,8 +45,7 @@
                 <div class="row">
                     <div class="col-md-12">
             @include('core-templates::common.errors')
-
-
+ 
 
            {!! Form::model($product, ['langRoute' => ['admin.products.update', $product->id], 'method' => 'patch']) !!}
 

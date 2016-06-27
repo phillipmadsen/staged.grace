@@ -20,8 +20,7 @@ use Fully\Models\ProductVariant;
 use Fully\Models\ProductFeature;
 use Fully\Models\Product;
 use Fully\Models\User;
-
-
+ 
 
 class ProductController extends AppBaseController
 {
@@ -151,7 +150,14 @@ class ProductController extends AppBaseController
      */
     public function edit($id)
     {
+        
         $product = $this->productRepository->findWithoutFail($id);
+        
+        
+      //  var_dump($product->toArray());
+        
+        //$category = $this->category->find($id);
+      
 
         if (empty($product))
         {
@@ -160,7 +166,10 @@ class ProductController extends AppBaseController
             return redirect(route(getLang() . '.admin.products.index'));
         }
 
-        return view('backend.products.edit')->with('product', $product);
+
+ 
+
+        return view('backend.products.edit')->with('product', 'category');
     }
 
     /**

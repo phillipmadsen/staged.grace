@@ -4,12 +4,24 @@
     {!! Form::text('slug', null, ['class' => 'form-control']) !!}
 </div>
 
-<!-- Category Field -->
+{{-- <!-- Category Field -->
 <div class="form-group col-sm-3">
     {!! Form::label('category', 'Category:') !!}
     {!! Form::select('category', $categories, null, ['class' => 'form-control', 'value'=>Input::old('category')]) !!}
 </div>
-
+ --}}
+ 
+ 
+ <div class="form-group required {{ $errors->has('category_id') ? 'has-error' : '' }}">
+    {!! Form::label('category_id', trans('product.category_id'), array('class' => 'control-label required')) !!}
+    <div class="controls">
+        {!! Form::select('category_id', $categories, null, array('id'=>'category_id','class' => 'form-control')) !!}
+        <span class="help-block">{{ $errors->first('category_id', ':message') }}</span>
+    </div>
+</div>
+ 
+ 
+ 
 <!-- Ispromo Field -->
 <div class="form-group col-sm-2">
     {!! Form::label('ispromo', 'Ispromo:') !!}

@@ -35,6 +35,11 @@ class Article extends BaseModel implements ModelInterface, SluggableInterface
     {
         return $this->hasMany('Fully\Models\Category', 'id', 'category_id');
     }
+    
+       public function user()
+    {
+        return $this->hasMany('Fully\Models\User', 'id', 'user_id');
+    }
 
     public function setUrlAttribute($value)
     {
