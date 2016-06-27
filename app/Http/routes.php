@@ -12,7 +12,7 @@ include 'new_routes.php';
 |--------------------------------------------------------------------------
  */
 
-Route::model('article', 'App\Models\Article');
+// Route::model('article', 'App\Models\Article');
 Route::model('product', 'App\Models\product');
 Route::pattern('slug', '[a-z0-9- _]+');
  // en/admin/products/{products}/edit
@@ -144,11 +144,12 @@ Route::group(['prefix' => LaravelLocalization::getCurrentLocale()], function ()
         ])->where('id', '[0-9]+');
 
         // blog
-        Route::resource('article', 'ArticleController', ['before' => 'hasAccess:article']);
-        Route::get('article/{id}/delete', [
-            'as'   => 'admin.article.delete',
-            'uses' => 'ArticleController@confirmDestroy'
-        ])->where('id', '\d+');
+        Route::resource('article', 'ArticleController', ['before' => 'hasAccess:article']); 
+ 
+        Route::get('article/{id}/edit',['as'=> 'admin.products.edit', 'uses' => 'ArticleController@getEdit']);
+        Route::get('article/{id}/delete', ['as'   => 'admin.article.delete', 'uses' => 'ArticleController@confirmDestroy'])->where('id', '\d+');
+        
+
 
         // news
         Route::resource('news', 'NewsController', ['before' => 'hasAccess:news']);
@@ -200,16 +201,15 @@ Route::group(['prefix' => LaravelLocalization::getCurrentLocale()], function ()
             'as'   => 'admin.video.delete',
             'uses' => 'VideoController@confirmDestroy'
         ])->where('id', '[0-9]+');
+        
         Route::post('/video/get-video-detail', [
             'as'   => 'admin.video.detail',
             'uses' => 'VideoController@getVideoDetail'
         ])->where('id', '[0-9]+');
 
         // ajax - blog
-        Route::post('article/{id}/toggle-publish', [
-            'as'   => 'admin.article.toggle-publish',
-            'uses' => 'ArticleController@togglePublish'
-        ])->where('id', '[0-9]+');
+        Route::post('article/{id}/toggle-publish', ['as'   => 'admin.article.toggle-publish', 'uses' => 'ArticleController@togglePublish'])->where('id', '[0-9]+');
+
 
         // ajax - news
         Route::post('news/{id}/toggle-publish', [

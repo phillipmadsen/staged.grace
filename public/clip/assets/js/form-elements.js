@@ -72,7 +72,7 @@ var FormElements = function () {
     };
     //function to initiate jquery.tagsinput
     var runTagsInput = function () {
-        $('#tags_1').tagsInput({
+        $('#tags').tagsInput({
             width: 'auto'
         });
     };

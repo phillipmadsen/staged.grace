@@ -66,7 +66,7 @@ class ArticleController extends Controller
         $pagiData = $this->article->paginate(Input::get('page', 1), $this->perPage, true);
         $articles = Pagination::makeLengthAware($pagiData->items, $pagiData->totalItems, $this->perPage);
 
-        $users = User::select(DB::raw('concat(first_name," ",last_name) as full_name,id'))->lists('full_name', 'id');
+ 
 
         return view('backend.article.index', compact('articles'));
     }
@@ -76,15 +76,15 @@ class ArticleController extends Controller
      *
      * @return Response
      */
+   
     public function create()
     {
         $categories = $this->category->lists();
-
         $users = User::select(DB::raw('concat(first_name," ",last_name) as full_name,id'))->lists('full_name', 'id');
-
         return view('backend.article.create', compact('categories', 'users'));
     }
-
+    
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -99,6 +99,7 @@ class ArticleController extends Controller
 
             return langRedirectRoute('admin.article.index');
         }
+        
         catch (ValidationException $e)
         {
             return langRedirectRoute('admin.article.create')->withInput()->withErrors($e->getErrors());
@@ -114,7 +115,6 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = $this->article->find($id);
-
         return view('backend.article.show', compact('article'));
     }
 
@@ -124,45 +124,19 @@ class ArticleController extends Controller
      * @param  int        $id
      * @return Response
      */
-	public function edit($id)
+	public function getEdit($id)
 	{
-		$article = $this->article->find($id);
-		//$user = $article->getUsers()->lists('name', 'id')->all();
-		//$category = Category::lists('title', 'id');
+        $article = $this->article->find($id);
+        $tags = null;
+        foreach ($article->tags as $tag) {
+            $tags .= ','.$tag->name;
+        }
+        $tags = substr($tags, 1);
         $categories = $this->category->lists();
-
-		//$users   = User::select(DB::raw('concat(first_name," ",last_name) as full_name,id'))->lists('full_name', 'id');
-		$tags = null;
-		foreach ($article->tags as $tag) {
-			$tags .= ','.$tag->name;
-		}
-		$tags = substr($tags, 1);
-
-		$users = $this->user->lists();
-		$categories = $this->category->lists();
-
-		return view('backend.article.edit', compact('article', 'tags', 'categories', 'users'));
+        return view('backend.article.edit', compact('article', 'tags', 'categories'));
 	}
 
-
-	//public function edit($id)
-    //{
-    //    $article = $this->article->find($id);
-    //    //$users   = User::select(DB::raw('concat(first_name," ",last_name) as full_name,id'))->lists('full_name', 'id');
-    //
-    //    $tags = null;
-
-        //foreach ($article->tags as $tag)
-        //{
-        //    $tags .= ',' . $tag->name;
-        //}
-        //
-        //$tags       = substr($tags, 1);
-        //$categories = $this->category->lists();
-
-    //    return view('backend.article.edit', compact('article', 'tags', 'categories', 'users'));
-    //}
-
+ 
     /**
      * Update the specified resource in storage.
      *

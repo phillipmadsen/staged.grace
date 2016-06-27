@@ -71,6 +71,8 @@ class ArticleController extends Controller
 
         $categories = $this->category->all();
         $tags = $this->tag->all();
+        
+    
 
         return view('frontend.article.show', compact('article', 'categories', 'tags'));
     }

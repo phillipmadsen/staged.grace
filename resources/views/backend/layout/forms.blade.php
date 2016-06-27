@@ -36,7 +36,7 @@
 
         <link rel="stylesheet" href="{!! asset('/clip/assets/plugins/select2/select2.css') !!}">
 
-        <link rel="stylesheet" href="{!! asset('/clip/assets/plugins/bootstrap-switch/static/stylesheets/bootstrap-switch.css') !!}">
+ 
         <link rel="stylesheet" href="{!! asset('/clip/assets/plugins/bootstrap-social-buttons/social-buttons-3.css') !!}">
 
 
@@ -195,6 +195,7 @@
         <!-- start: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
 
 
+        
         <script src="{!! asset('/clip/assets/plugins/jquery-inputlimiter/jquery.inputlimiter.1.3.1.min.js') !!}"></script>
         <script src="{!! asset('/clip/assets/plugins/autosize/jquery.autosize.min.js') !!}"></script>
         <script src="{!! asset('/clip/assets/plugins/select2/select2.min.js') !!}"></script>
@@ -215,12 +216,34 @@
 
 @yield('bottomscripts')
         <!-- end: JAVASCRIPTS REQUIRED FOR THIS PAGE ONLY -->
-<script>
+   <script type="text/javascript">
     jQuery(document).ready(function() {
         Main.init();
+        FormElements.init();
 @yield('clipinline')
     });
+   
+    window.onload = function () {
+        CKEDITOR.replace('content', {
+            "filebrowserBrowseUrl": "{!! url('filemanager/show') !!}"
+        });
+    };
+
+    $(document).ready(function () {
+
+        if ($('#tag').length != 0) {
+            var elt = $('#tag');
+            elt.tagsinput();
+        }
+    });
+ 
 </script>
+
+   
+
+<!-- Show Pop up Window if there is message called back -->
+<?php if(session('message')) {echo '<script> document.getElementById("popup_message").click(); </script>'; } ?>
+ 
     </body>
     <!-- end: BODY -->
 </html>
