@@ -167,7 +167,9 @@ return [
         \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
         \InfyOm\CoreTemplates\CoreTemplatesServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Bootstrapper\BootstrapperL5ServiceProvider::class
+        Bootstrapper\BootstrapperL5ServiceProvider::class,
+        Mpociot\LaravelTestFactoryHelper\TestFactoryHelperServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
 
     ],
     /*
