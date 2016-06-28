@@ -12,10 +12,10 @@ include 'new_routes.php';
 |--------------------------------------------------------------------------
  */
 
-// Route::model('article', 'App\Models\Article');
-Route::model('product', 'App\Models\product');
+Route::model('article', 'Fully\Models\Article');
+Route::model('product', 'Fully\Models\Product');
 Route::pattern('slug', '[a-z0-9- _]+');
- // en/admin/products/{products}/edit
+ 
 /*
 |--------------------------------------------------------------------------
 | Frontend Routes
@@ -145,8 +145,8 @@ Route::group(['prefix' => LaravelLocalization::getCurrentLocale()], function ()
 
         // blog
         Route::resource('article', 'ArticleController', ['before' => 'hasAccess:article']); 
- 
-        Route::get('article/{id}/edit',['as'=> 'admin.products.edit', 'uses' => 'ArticleController@getEdit']);
+        Route::get('article/{id}/edit',['as'=> 'admin.article.edit', 'uses' => 'ArticleController@edit']);
+        // Route::get('article/{id}/edit',['as'=> 'admin.article.edit', 'uses' => 'ArticleController@getEdit']);
         Route::get('article/{id}/delete', ['as'   => 'admin.article.delete', 'uses' => 'ArticleController@confirmDestroy'])->where('id', '\d+');
         
 
@@ -384,9 +384,20 @@ Route::group(['prefix' => LaravelLocalization::getCurrentLocale()], function () 
         Route::get('/', ['as' => 'shop', 'uses' => 'ShopController@index']);
         Route::get('/{slug}', ['as' => 'shop.product', 'uses' => 'ShopController@product']);
 
-        Route::get('/cart', ['as' => 'shop.cart', 'uses' => 'CartController@showCart']);
-            Route::get('/addProduct/{productId}', 'CartController@addItem');
-            Route::get('/removeItem/{productId}', 'CartController@removeItem');
+        // Route::get('/cart', ['as' => 'shop.cart', 'uses' => 'CartController@Cart']);
+        
+            Route::post('/cart/add', [ 
+                'as' => 'addToCart', 
+                'uses' => 'CartController@postAddToCart'
+            ]);
+            
+            // Route::post('/cart/add', function () {});
+            
+            
+            //http://staged.grace/en/shop/cart/add
+            
+            
+           // Route::get('/removeItem/{productId}', 'CartController@removeItem');
 
         Route::get('/cart/checkout', ['as' => 'shop.cart.checkout', 'uses' => 'CartController@checkout']);
 

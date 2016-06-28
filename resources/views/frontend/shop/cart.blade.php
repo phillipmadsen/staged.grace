@@ -1,13 +1,13 @@
 @extends('frontend/layout/secure')
-@section('htmlschema')@endsection
-@section('seo')@endsection
-@section('jsonschema')@endsection
+
+
+ 
 
 @section('title')
 Cart | Secure Area
 @endsection
 
-@section('bodyschema')@endsection
+ 
 @section('header_styles')@endsection
 @section('scripts')@endsection
 @section('ppscripts')@endsection
@@ -43,7 +43,7 @@ Cart | Secure Area
                 <div class="container clearfix">
 
                     <div class="table-responsive bottommargin">
-
+                        @if(count($cart))
                         <table class="table cart">
                             <thead>
                                 <tr>
@@ -56,6 +56,7 @@ Cart | Secure Area
                                 </tr>
                             </thead>
                             <tbody>
+                            @foreach($cart as $item)
                                 <tr class="cart_item">
                                     <td class="cart-product-remove">
                                         <a href="#" class="remove" title="Remove this item"><i class="icon-trash2"></i></a>
@@ -66,11 +67,11 @@ Cart | Secure Area
                                     </td>
 
                                     <td class="cart-product-name">
-                                        <a href="#">Pink Printed Dress</a>
+                                        <a href="#">{{$item->id}} {{$item->name}} </a>
                                     </td>
 
                                     <td class="cart-product-price">
-                                        <span class="amount">$19.99</span>
+                                        <span class="amount">{{$item->price}} </span>
                                     </td>
 
                                     <td class="cart-product-quantity">
@@ -82,85 +83,13 @@ Cart | Secure Area
                                     </td>
 
                                     <td class="cart-product-subtotal">
-                                        <span class="amount">$39.98</span>
+                                        <span class="amount">{{$item->subtotal}} </span>
                                     </td>
                                 </tr>
-                                <tr class="cart_item">
-                                    <td class="cart-product-remove">
-                                        <a href="#" class="remove" title="Remove this item"><i class="icon-trash2"></i></a>
-                                    </td>
-
-                                    <td class="cart-product-thumbnail">
-                                        <a href="#"><img width="64" height="64" src="http://www.placehold.it/64x64/EFEFEF/AAAAAA" alt="Checked Canvas Shoes"></a>
-                                    </td>
-
-                                    <td class="cart-product-name">
-                                        <a href="#">Checked Canvas Shoes</a>
-                                    </td>
-
-                                    <td class="cart-product-price">
-                                        <span class="amount">$24.99</span>
-                                    </td>
-
-                                    <td class="cart-product-quantity">
-                                        <div class="quantity clearfix">
-                                            <input type="button" value="-" class="minus">
-                                            <input type="text" name="quantity" value="1" class="qty" />
-                                            <input type="button" value="+" class="plus">
-                                        </div>
-                                    </td>
-
-                                    <td class="cart-product-subtotal">
-                                        <span class="amount">$24.99</span>
-                                    </td>
-                                </tr>
-                                <tr class="cart_item">
-                                    <td class="cart-product-remove">
-                                        <a href="#" class="remove" title="Remove this item"><i class="icon-trash2"></i></a>
-                                    </td>
-
-                                    <td class="cart-product-thumbnail">
-                                        <a href="#"><img width="64" height="64" src="http://www.placehold.it/64x64/EFEFEF/AAAAAA" alt="Pink Printed Dress"></a>
-                                    </td>
-
-                                    <td class="cart-product-name">
-                                        <a href="#">Blue Men Tshirt</a>
-                                    </td>
-
-                                    <td class="cart-product-price">
-                                        <span class="amount">$13.99</span>
-                                    </td>
-
-                                    <td class="cart-product-quantity">
-                                        <div class="quantity clearfix">
-                                            <input type="button" value="-" class="minus">
-                                            <input type="text" name="quantity" value="3" class="qty" />
-                                            <input type="button" value="+" class="plus">
-                                        </div>
-                                    </td>
-
-                                    <td class="cart-product-subtotal">
-                                        <span class="amount">$41.97</span>
-                                    </td>
-                                </tr>
-                                <tr class="cart_item">
-                                    <td colspan="6">
-                                        <div class="row clearfix">
-                                            <div class="col-md-4 col-xs-4 nopadding">
-                                                <div class="col-md-8 col-xs-7 nopadding">
-                                                    <input type="text" value="" class="sm-form-control" placeholder="Enter Coupon Code.." />
-                                                </div>
-                                                <div class="col-md-4 col-xs-5">
-                                                    <a href="#" class="button button-3d button-black nomargin">Apply Coupon</a>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8 col-xs-8 nopadding">
-                                                <a href="#" class="button button-3d nomargin fright">Update Cart</a>
-                                                <a href="shop.html" class="button button-3d notopmargin fright">Proceed to Checkout</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @endforeach
+                                @else
+                                <p>You have no items in the shopping cart</p>
+                                @endif
                             </tbody>
 
                         </table>
@@ -443,7 +372,7 @@ Cart | Secure Area
                                             </td>
 
                                             <td class="cart-product-name">
-                                                <span class="amount">$106.94</span>
+                                                <span class="amount">{{$item->subtotal}}</span>
                                             </td>
                                         </tr>
                                         <tr class="cart_item">
@@ -461,7 +390,7 @@ Cart | Secure Area
                                             </td>
 
                                             <td class="cart-product-name">
-                                                <span class="amount color lead"><strong>$106.94</strong></span>
+                                                <span class="amount color lead"><strong>{{Cart::total()}}</strong></span>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -3,7 +3,9 @@
 namespace Fully\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+ 
+use Illuminate\Support\Facades\Redirect;
+use Fully\Models\Cart;
 use Fully\Http\Requests;
 use Fully\Http\Controllers\Controller;
 use Fully\Models\Product;
@@ -28,7 +30,7 @@ class ShopController extends Controller
          return view('frontend.shop.index',['products' => $products]);
         //return view('frontend.shop.index', compact('products', $products));
     }
-
+// http://www.tutorials.kode-blog.com/laravel-5-shopping-cart
     /**
      * Display the specified product.
      *
@@ -45,4 +47,6 @@ class ShopController extends Controller
         return view('frontend.shop.product', ['product' => Product::findBySlug($slug)]);
 
     }
+    
+
 }

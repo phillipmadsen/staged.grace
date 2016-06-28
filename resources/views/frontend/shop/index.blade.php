@@ -117,6 +117,7 @@ ga('send', 'event', 'catalog', 'impression', {'nonInteraction': true});
                                 <div class="product-image">
 @if($product->path)
 <a href="{!! url($product->path . $product->file_name) !!}" data-lightbox="image">
+
 <img class="image_fade" src="{!! url($product->path . $product->file_name) !!}" style="border: 1px solid #bdc3c7;" alt="{!! $product->title !!} image"/>
 </a>
 @else
