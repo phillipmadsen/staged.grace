@@ -1,7 +1,11 @@
 <?php
 
 
-
+Route::get('admin/upload', 'Admin\UploadController@index');
+Route::post('admin/upload/file', 'Admin\UploadController@uploadFile');
+Route::delete('admin/upload/file', 'Admin\UploadController@deleteFile');
+Route::post('admin/upload/folder', 'Admin\UploadController@createFolder');
+Route::delete('admin/upload/folder', 'Admin\UploadController@deleteFolder');
 
 
 Route::group(['prefix' => LaravelLocalization::getCurrentLocale()], function ()

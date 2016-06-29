@@ -24,7 +24,9 @@
         "infyomlabs/swagger-generator": "dev-master",
         "jlapp/swaggervel": "dev-master",
         "doctrine/dbal": "^2.5",
-        "cviebrock/eloquent-sluggable": "^3.1"
+        "cviebrock/eloquent-sluggable": "^3.1",
+           "dflydev/apache-mime-types": "^1.0"
+
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -37,7 +39,8 @@
         "psr-4": {
             "Fully\\": "app/"
         },
-        "files": ["app/Helper/helpers.php"]
+        "files": ["app/Helper/helpers.php","app/helpers.php"]
+
     },
     "autoload-dev": {
         "classmap": ["tests/TestCase.php"]
