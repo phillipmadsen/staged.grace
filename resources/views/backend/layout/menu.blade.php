@@ -182,6 +182,18 @@
                 </ul>
             </li>
 
+            <li class="treeview">
+                <a href="#"> <i class="fa fa-share"></i> <span>Media Management</span> <i class="fa fa-angle-left pull-right"></i> </a>
+                <ul class="treeview-menu" style="display: block;">
+
+                 <li><a href="{{ url(getLang() . '/admin/upload') }}"><i class="fa fa-question-circle"></i> Upload File</a></li>
+
+                </ul>
+            </li>
+
+
+
+
 
 
        <li class="{{ setActive('admin/logout*') }}">

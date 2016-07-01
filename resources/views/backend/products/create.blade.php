@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="/clip/assets/plugins/jQuery-Tags-Input/jquery.tagsinput.css">
         <link rel="stylesheet" href="/clip/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css">
         <link rel="stylesheet" href="/clip/assets/plugins/summernote/build/summernote.css">
- 
+
 @endsection
 
 @section('pagetitle')

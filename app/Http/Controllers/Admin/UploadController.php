@@ -1,11 +1,11 @@
 <?php
 
-	namespace App\Http\Controllers\Admin;
+	namespace Fully\Http\Controllers\Admin;
 
-	use App\Http\Controllers\Controller;
-	use App\Http\Requests\UploadFileRequest;
-	use App\Http\Requests\UploadNewFolderRequest;
-	use App\Services\UploadsManager;
+	use Fully\Http\Controllers\Controller;
+	use Fully\Http\Requests\UploadFileRequest;
+	use Fully\Http\Requests\UploadNewFolderRequest;
+	use Fully\Services\UploadsManager;
 	use Illuminate\Http\Request;
 	use Illuminate\Support\Facades\File;
 

@@ -61,5 +61,14 @@ class User extends EloquentUser
     }
 
 
+	public function fullName()
+	{
+		return $this->first . ' ' . $this->last;
+	}
+
+	public function accountAge()
+	{
+		return $this->created_at->diffForHumans();
+	}
 
 }

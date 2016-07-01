@@ -20,6 +20,7 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
 
             $table->string('pic')->nullable();
+            $table->integer('profile_image_id')->nullable();
 
             $table->string('username')->nullable();
             $table->string('display_name')->nullable();

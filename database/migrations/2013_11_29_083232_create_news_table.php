@@ -18,6 +18,7 @@ class CreateNewsTable extends Migration
             $table->string('slug')->nullable();
             $table->date('datetime');
             $table->timestamps();
+            $table->integer('featured_image_id')->nullable();
             $table->boolean('is_published')->default(true);
             $table->string('path', 255)->nullable();
             $table->string('file_name', 255)->nullable();

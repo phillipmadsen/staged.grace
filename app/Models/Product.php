@@ -5,7 +5,8 @@ namespace Fully\Models;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
-
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -383,11 +384,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      )
  * )
  */
-class Product extends Model implements SluggableInterface
+class Product extends Model implements SluggableInterface, HasMediaConversions
 {
 
     use SluggableTrait;
+
+    use HasMediaTrait;
+
     use SoftDeletes;
+
+
+    public function registerMediaConversions()
+    {
+        $this->addMediaConversion('list')->setManipulations(['w' => 368, 'h' => 232])->performOnCollections('product_images');
+        $this->addMediaConversion('detail')->setManipulations(['w' => 368, 'h' => 232])->performOnCollections('product_images');
+        $this->addMediaConversion('detail_thumb')->setManipulations(['w' => 368, 'h' => 232])->performOnCollections('product_images');
+    }
+
+
+
+
+
 
     public $table = 'products';
 
@@ -488,7 +505,7 @@ class Product extends Model implements SluggableInterface
     ];
 
 
-     protected $sluggable = array(
+    protected $sluggable = array(
          'build_from' => 'name',
          'save_to' => 'slug',
      );
@@ -513,12 +530,12 @@ class Product extends Model implements SluggableInterface
 
 
 
-     public function category()
-     {
-         $categories = $this->hasOne(Category::class, 'id', 'category_id') ->select(['id', 'title']);
+    public function category()
+    {
+        $categories = $this->hasOne(Category::class, 'id', 'category_id') ->select(['id', 'title']);
 
-         return $categories;
-     }
+        return $categories;
+    }
 
     public function variants()
     {
@@ -533,8 +550,8 @@ class Product extends Model implements SluggableInterface
     public function cat()
     {
         return $this->belongsTo(Category::class, 'category_id');
-    } 
-    
+    }
+
     public function productVariants()
     {
         return $this->hasMany(ProductVariant::class);
@@ -549,18 +566,18 @@ class Product extends Model implements SluggableInterface
     {
         return $this->hasMany(SaleorderProduct::class, 'product_id');
     }
-    
-       public function invoiceProduct()
+
+    public function invoiceProduct()
     {
         return $this->hasMany(InvoiceProduct::class, 'product_id');
     }
 
-       public function images()
+    public function images()
     {
         return $this->hasMany(Image::class, 'product_id');
     }
-    
-           public function productImages()
+
+    public function productImages()
     {
         return $this->hasMany(Image::class, 'product_id');
     }

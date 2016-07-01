@@ -167,6 +167,12 @@ return [
         \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
         \InfyOm\CoreTemplates\CoreTemplatesServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
+        Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
+        Spatie\Analytics\AnalyticsServiceProvider::class,
+        Spatie\Glide\GlideServiceProvider::class,
+        Spatie\GoogleTagManager\GoogleTagManagerServiceProvider::class,
+
+
 
     ],
     /*
@@ -237,7 +243,10 @@ return [
         'Search'              => Fully\Search\Facade\Search::class,
         'Flash'               => Laracasts\Flash\Flash::class,
         'Menu'                => Caffeinated\Menus\Facades\Menu::class,
-            'Datatables'          => Yajra\Datatables\Facades\Datatables::class,
+        'Datatables'          => Yajra\Datatables\Facades\Datatables::class,
+        'Analytics'           => Spatie\Analytics\AnalyticsFacade::class,
+        'GlideImage' => Spatie\Glide\GlideImageFacade::class,
+        'GoogleTagManager' => Spatie\GoogleTagManager\GoogleTagManagerFacade::class,
 
         //
 

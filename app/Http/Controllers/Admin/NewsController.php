@@ -27,6 +27,7 @@ class NewsController extends Controller
         View::share('active', 'modules');
         $this->news = $news;
         $this->perPage = config('fully.modules.news.per_page');
+
     }
 
     /**
@@ -59,8 +60,10 @@ class NewsController extends Controller
      */
     public function store()
     {
+
         try {
-            $this->news->create(Input::all());
+	        $input = Input::all();
+	        $this->addMedia($input->file('featured_image_id'))->toCollection('news-images');
             Flash::message('News was successfully added');
 
             return langRedirectRoute('admin.news.index');

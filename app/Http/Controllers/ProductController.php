@@ -14,7 +14,7 @@ use Fully\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
-use Fully\Logic\Image\ImageRepository;
+// use Fully\Logic\Image\ImageRepository;
 use Illuminate\Support\Facades\Input;
 use Fully\Models\ProductVariant;
 use Fully\Models\ProductFeature;
@@ -29,20 +29,20 @@ class ProductController extends AppBaseController
     private $productRepository;
     private $model;
     private $user;
-    protected $img;
+    protected $image;
     protected $category;
 
     /**
      * @param ProductRepository $productRepo
      * @param CategoryInterface $category
      */
-    public function __construct(ProductRepository $productRepo, CategoryInterface $category, Product $model, User $user, ImageRepository $imageRepository)
+    public function __construct(ProductRepository $productRepo, CategoryInterface $category, Product $model, User $user)
     {
         $this->productRepository = $productRepo;
         $this->category          = $category;
         $this->model = $model;
         $this->user = $user;
-        $this->image = $imageRepository;
+
 
     }
 
@@ -56,6 +56,8 @@ class ProductController extends AppBaseController
     {
         $this->productRepository->pushCriteria(new RequestCriteria($request));
         $products = $this->productRepository->paginate(20);
+
+
 
         return view('backend.products.index')
             ->with('products', $products);
@@ -83,16 +85,29 @@ class ProductController extends AppBaseController
     {
         $input = $request->all();
 
+	    //try {
 
-        if ($request->hasFile('product_image_file'))
-        {
-            $file = $request->file('product_image_file');
-            $file = $this->productRepository->uploadProductImage($file);
+		    //$productImages = Product::find(1);
+		    //$productImages->addMedia($pathToFile)->toCollection('product-images');
+		    ////$productImages->addMediaFromRequest('image')->toCollection('product-images');
+		    //
+		    ////$productImages->addMedia($list)->toCollectionOnDisk('product-images', 'local');
+		    ////$productImages->addMedia($detail)->toCollectionOnDisk('product-images', 'local');
+		    ////$productImages->addMedia($detail_thumb)->toCollectionOnDisk('product-images', 'local');
+		    //foreach ($input->file('images') as $image) {
+			 //   $input->addMedia($image)->toCollection('product-images');
+		    //}
 
-            $request->merge(['product_image' => $file->getFileInfo()->getFilename()]);
+	    //}
+        // if ($request->hasFile('images'))
+        // {
+        //     $file = $request->file('product_image_file');
+        //     $file = $this->productRepository->uploadProductImage($file);
 
-            $this->generateProductThumbnail($file);
-        }
+        //     $request->merge(['product_image' => $file->getFileInfo()->getFilename()]);
+
+        //     $this->generateProductThumbnail($file);
+        // }
 
         $product = $this->productRepository->create($input, $request->except('attribute_name', 'product_attribute_value', 'product_image_file'));
 

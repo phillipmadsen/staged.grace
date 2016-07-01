@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace Fully\Services;
 
 use Carbon\Carbon;
 use Dflydev\ApacheMimeTypes\PhpRepository;

@@ -20,6 +20,7 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->string('subtitle')->nullable();
             $table->text('excerpt');
+            $table->integer('article_image_id')->nullable();
             $table->text('content');
             $table->string('slug')->nullable();
             $table->string('meta_title')->nullable();

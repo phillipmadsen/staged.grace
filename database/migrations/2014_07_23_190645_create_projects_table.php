@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('path', 255);
             $table->string('file_name', 255);
             $table->integer('file_size');
+            $table->integer('project_image_id')->nullable();
             $table->string('lang', 20);
             $table->timestamps();
         });

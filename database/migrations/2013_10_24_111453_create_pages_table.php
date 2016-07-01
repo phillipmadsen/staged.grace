@@ -36,6 +36,7 @@ class CreatepagesTable extends Migration
             $table->string('path')->nullable();
             $table->string('file_name')->nullable();
             $table->integer('file_size')->unsigned();
+            $table->integer('featured_image_id')->nullable();
             $table->string('lang', 20);
             $table->integer('author_id')->unsigned()->nullable();
             $table->integer('section_id')->unsigned()->nullable();

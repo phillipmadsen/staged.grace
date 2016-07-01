@@ -25,7 +25,18 @@
         "jlapp/swaggervel": "dev-master",
         "doctrine/dbal": "^2.5",
         "cviebrock/eloquent-sluggable": "^3.1",
-           "dflydev/apache-mime-types": "^1.0"
+        "dflydev/apache-mime-types": "^1.0",
+        "orangehill/iseed": "^2.1",
+        "patricktalmadge/bootstrapper": "^5.9",
+        "mpociot/laravel-test-factory-helper": "^0.2.1",
+        "webpatser/laravel-uuid": "^2.0",
+
+        "spatie/laravel-medialibrary": "^4.3",
+        "laracasts/presenter": "^0.2.1",
+        "league/glide": "^1.0",
+        "spatie/laravel-analytics": "^2.1",
+        "spatie/laravel-googletagmanager": "^2.2"
+
 
     },
     "require-dev": {
