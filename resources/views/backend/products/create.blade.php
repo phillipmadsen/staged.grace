@@ -1,4 +1,10 @@
+@inject('users', 'Cartalyst\Sentinel\Users\EloquentUser')
+@inject('categories', 'Fully\Models\Category')
+
+
 @extends('backend/layout/clip')
+
+
 
 @section('topscripts')
         <link rel="stylesheet" href="/clip/assets/plugins/select2/select2.css">
@@ -9,7 +15,7 @@
         <link rel="stylesheet" href="/clip/assets/plugins/jQuery-Tags-Input/jquery.tagsinput.css">
         <link rel="stylesheet" href="/clip/assets/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css">
         <link rel="stylesheet" href="/clip/assets/plugins/summernote/build/summernote.css">
- 
+
 @endsection
 
 @section('pagetitle')

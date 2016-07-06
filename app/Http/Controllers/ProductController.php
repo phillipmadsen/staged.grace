@@ -83,7 +83,7 @@ class ProductController extends AppBaseController
     {
         $input = $request->all();
 
-
+        $product = $this->productRepository->create($input, $request->except('attribute_name', 'product_attribute_value'));
         if ($request->hasFile('product_image_file'))
         {
             $file = $request->file('product_image_file');
@@ -94,7 +94,7 @@ class ProductController extends AppBaseController
             $this->generateProductThumbnail($file);
         }
 
-        $product = $this->productRepository->create($input, $request->except('attribute_name', 'product_attribute_value', 'product_image_file'));
+
 
         if (!empty($request->attribute_name))
         {
