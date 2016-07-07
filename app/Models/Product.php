@@ -533,8 +533,8 @@ class Product extends Model implements SluggableInterface
     public function cat()
     {
         return $this->belongsTo(Category::class, 'category_id');
-    } 
-    
+    }
+
     public function productVariants()
     {
         return $this->hasMany(ProductVariant::class);
@@ -549,7 +549,7 @@ class Product extends Model implements SluggableInterface
     {
         return $this->hasMany(SaleorderProduct::class, 'product_id');
     }
-    
+
        public function invoiceProduct()
     {
         return $this->hasMany(InvoiceProduct::class, 'product_id');
@@ -559,7 +559,7 @@ class Product extends Model implements SluggableInterface
     {
         return $this->hasMany(Image::class, 'product_id');
     }
-    
+
            public function productImages()
     {
         return $this->hasMany(Image::class, 'product_id');
@@ -569,4 +569,56 @@ class Product extends Model implements SluggableInterface
     {
         return $this->belongsToMany(User::class);
     }
+
+
+
+
+
+	public function uploadThumbAndMainImage($request,$ProductId)
+    {
+      // get basic info
+        $s3 = Storage::disk('s3');
+        $file = $request->file('images');
+        $extension = $request->file('images')->guessExtension();
+        $filename = uniqid() . '.' . $extension;
+        $mimeType = $request->file('images')->getClientMimeType();
+        $fileSize = $request->file('images')->getClientSize();
+        $image = Image::make($file);
+
+        // generate the thumb and medium image
+        $imageThumb = Image::make($file)->fit(320)->crop(320, 240, 0, 0);
+        $imageThumb->encode($extension);
+
+        $imageMedium = Image::make($file)->resize(800, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $imageMedium->encode($extension);
+
+        $image->encode($extension);
+
+        // upload image to S3
+        $s3->put("images/{$userId}/main/" . $filename, (string) $image, 'public');
+        $s3->put("images/{$userId}/medium/" . $filename, (string) $imageMedium, 'public');
+        $s3->put("images/{$userId}/thumb/" . $filename, (string) $imageThumb, 'public');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

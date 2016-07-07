@@ -84,15 +84,20 @@ class ProductController extends AppBaseController
         $input = $request->all();
 
         $product = $this->productRepository->create($input, $request->except('attribute_name', 'product_attribute_value'));
-        if ($request->hasFile('product_image_file'))
-        {
-            $file = $request->file('product_image_file');
-            $file = $this->productRepository->uploadProductImage($file);
 
-            $request->merge(['product_image' => $file->getFileInfo()->getFilename()]);
+        foreach($uploadedImages as $upload) {
+			// TODO Check if the uploaded file is valid
 
-            $this->generateProductThumbnail($file);
-        }
+			// Save the uploaded image path to the database
+			$image = new Image;
+			$image->url = $upload->getClientOriginalName();
+
+			// TODO Copy the uploaded image to the destination directory
+
+			$product->images()->save($image);
+		}
+
+
 
 
 
