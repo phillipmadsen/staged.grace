@@ -10,6 +10,10 @@
 <div class="form-group col-md-4">
 {!! Form::file('images', null, array('class'=>'form-control', 'id' => 'images', 'value'=>Input::old('images'))) !!}
 </div>
+
+	    <div class="form-group col-md-4">
+		    {!! Form::file('product_image', null, array('class'=>'form-control', 'id' => 'product_image', 'value'=>Input::old('product_image'))) !!}
+	    </div>
              <!-- Office Status Field -->
         <div class="form-group col-md-4">
             {!! Form::label('office_status', 'Office Status:') !!}

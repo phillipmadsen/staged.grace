@@ -44,4 +44,11 @@ class ProductImage extends Model
         'path'          => 'string'
     ];
 
+	/**
+	 * Configure the Model
+	 **/
+	public function model()
+	{
+		return ProductImage::class;
+	}
 }

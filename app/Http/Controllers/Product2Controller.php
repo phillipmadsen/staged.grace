@@ -29,12 +29,12 @@ use Response;
 class ProductController extends AppBaseController
 {
 
- 	private $productRepository;
+	private $productRepository;
 	private $model;
 	private $user;
 	protected $productImage;
 	protected $category;
-
+	protected $productImage;
 
 	/**
 	 * @param ProductRepository $productRepo
@@ -55,7 +55,6 @@ class ProductController extends AppBaseController
 
 
 	}
-
 
 	/**
 	 * Display a listing of the Product.
@@ -85,6 +84,7 @@ class ProductController extends AppBaseController
 
 		return view('backend.products.create', compact('categories', 'product_images'));
 	}
+
 	/**
 	 * Store a newly created Product in storage.
 	 *
@@ -93,56 +93,18 @@ class ProductController extends AppBaseController
 	 */
 	public function store(CreateProductRequest $request)
 	{
-
 		$input = $request->all();
 
-		$product = $this->productRepository->create($input, $request->except('attribute_name', 'product_attribute_value'));
+		if ($request->hasFile('image'))
+		{
+			$file = $request->file('image');
+			$file = $this->productRepository->uploadProductImage($file);
+			$request->merge(['image' => $file->getFileInfo()->getFilename()]);
+			$this->generateProductThumbnail($file);
+			$this->generateProductCatalog($file);
+		}
 
-//dd($request);
-
-        if ($input->hasFile('image'))
-        {
-            $file = $request->file('image');
-            $file = $this->productRepository->uploadProductImage($file);
-            $request->merge(['image' => $file->getFileInfo()->getFilename()]);
-            $this->generateProductThumbnail($file);
-            $this->generateProductCatalog($file);
-        }
-
-		//if($input->hasFile('images')) {
-
-			$files = null;
-
-			$files = $request->file('images');
-
-			foreach ($files as $file)
-			{
-				$filename = $this->file($request->file('images'));
-				$path = public_path('uploads/products');
-				$original_name = $file->getClientOriginalName();
-
-				// Validate each file
-				$rules     = ['images' => 'image|mimes:jpg,jpeg,bmp,png,gif|max:9000'];
-				$validator = Validator::make(['file' => $file], $rules);
-
-				if ($validator->fails())
-				{
-					return response()->json(['errors' => $validator->messages()->all()], 400);
-				}
-
-				//save the image and get the $path to the file
-
-				ProductImage::create([
-					'product_id' => $product->id,
-	            	'path' => $path,
-				    'filename' => $filename,
-				    'original_name' => $original_name
-	            	]);
-
-				$file->move($path, $filename);
-
-	        }
-		//}
+		$product = $this->productRepository->create($input);
 
 		if (!empty($request->attribute_name))
 		{
@@ -166,9 +128,31 @@ class ProductController extends AppBaseController
 			}
 		}
 
+
+
+		Flash::success('Product saved successfully.');
+
+		return redirect(route('admin.products.index'));
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	Flash::success('Product saved successfully.');
 
-
+dd($input);
 	return redirect(route(getLang() . '.admin.products.index'));
 }
 
@@ -220,44 +204,46 @@ function edit($id)
  * @return Response
  */
 
-function update($id, UpdateProductRequest $request)
-{
-	$product = $this->productRepository->findWithoutFail($id);
-
-	if (empty($product))
+ 	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @internal param int $id
+	 * @param  ProductRequest|Request      $request
+	 * @param  Product                     $product
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(UpdateProductRequest $request, Product $product)
 	{
-		Flash::error('Product not found');
-
-		return redirect(route(getLang() . '.admin.products.index'));
-	}
-
-	if ($request->hasFile('product_image_file'))
-	{
-		$file = $request->file('product_image_file');
-		$file = $this->productRepository->uploadProductImage($file);
-		$request->merge([
-			'product_image' => $file->getFileInfo()->getFilename()
-		]);
-		$this->generateProductThumbnail($file);
-	}
-	if (empty($product))
-	{
-		Flash::error('Product not found');
-		return redirect(route('admin.products.index'));
-	}
-
-	$product->update($request->except('attribute_name', 'product_attribute_value', 'product_image_file', 'feature_name'));
-
-	if (!empty($request->attribute_name))
-	{
-		foreach ($request->attribute_name as $key => $item)
+		$product = $this->productRepository->findWithoutFail($id);
+		if (empty($product))
 		{
-			$productVariant                          = new ProductVariant();
-			$productVariant->attribute_name          = $item;
-			$productVariant->product_attribute_value = $request->product_attribute_value[$key];
-			$product->productVariants()->save($productVariant);
+			Flash::error('Product not found');
+
+			return redirect(route('admin.products.index'));
 		}
-	}
+		if ($request->hasFile('image'))
+		{
+			$file = $request->file('image');
+			$file = $this->productRepository->uploadProductImage($file);
+			$request->merge([
+				'image' => $file->getFileInfo()->getFilename()
+			]);
+			$this->generateProductThumbnail($file);
+		}
+		$product->update($request->except('attribute_name', 'product_attribute_value', 'image', 'feature'));
+		//$product = $this->productRepository->update($request->all(), $id);
+
+		if (!empty($request->attribute_name))
+		{
+			foreach ($request->attribute_name as $key => $item)
+			{
+				$productVariant                          = new ProductVariant();
+				$productVariant->attribute_name          = $item;
+				$productVariant->product_attribute_value = $request->product_attribute_value[$key];
+				$product->productVariants()->save($productVariant);
+			}
+		}
+
 
 	if (!empty($request->feature_name))
 	{
@@ -270,6 +256,8 @@ function update($id, UpdateProductRequest $request)
 	}
 
 	$product = $this->productRepository->update($request->all(), $id);
+
+	ProductVariant::where('product_id', $product->id)->delete();
 
 	Flash::success('Product updated successfully.');
 

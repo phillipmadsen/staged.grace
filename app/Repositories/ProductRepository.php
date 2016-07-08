@@ -2,7 +2,7 @@
 
 namespace Fully\Repositories;
 
-use Fully\Models\Img;
+use Fully\Models\Image;
 use Illuminate\Support\Str;
 use File;
 use Input;

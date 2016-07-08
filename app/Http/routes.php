@@ -395,3 +395,11 @@ Route::group(['prefix' => LaravelLocalization::getCurrentLocale()], function () 
 
 
 
+	Route::get('/', ['as' => 'upload', 'uses' => 'ImageController@getUpload']);
+	Route::post('upload', ['as' => 'upload-post', 'uses' =>'ImageController@postUpload']);
+	Route::post('upload/delete', ['as' => 'upload-remove', 'uses' =>'ImageController@deleteUpload']);
+	/**
+	 * Part 2 - Display already uploaded images in Dropzone
+	 */
+	Route::get('example-2', ['as' => 'upload-2', 'uses' => 'ImageController@getServerImagesPage']);
+	Route::get('server-images', ['as' => 'server-images', 'uses' => 'ImageController@getServerImages']);
