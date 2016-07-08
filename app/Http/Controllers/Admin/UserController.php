@@ -91,6 +91,25 @@ class UserController extends Controller
         return Redirect::action('Admin\UserController@index');
     }
 
+
+     public function updateAvatar(Request $request)
+    {
+        $this->validate($request, [
+            'file_name'     => 'required|mimes:jpeg,bmp,png|between:1,7000',
+        ]);
+
+        $filename  = $request->file('file_name')->getRealPath();
+
+        Cloudder::upload($filename, null);
+        list($width, $height) = getimagesize($filename);
+
+        $fileUrl = Cloudder::show(Cloudder::getPublicId(), ["width" => $width, "height" => $height]);
+
+        $this->user->update(['avatar' => $fileUrl]);
+
+        return redirect()->back()->with('info', 'Your Avatar has been updated Successfully');
+    }
+
     /**
      * Display the specified resource.
      *
