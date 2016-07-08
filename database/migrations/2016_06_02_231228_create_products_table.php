@@ -54,7 +54,13 @@ class CreateproductsTable extends Migration
             $table->string('tax_status')->nullable();
             $table->string('tax_class')->nullable();
             $table->string('video_url')->nullable();
-  
+
+            $table->morphs('model');
+            $table->unsignedInteger('order_column')->nullable();
+            $table->string('product_image')->nullable();
+            $table->string('image')->nullable();
+            $table->string('images')->nullable();
+
             $table->string('path')->nullable();
             $table->string('file_name')->nullable();
             $table->integer('file_size')->unsigned()->nullable();

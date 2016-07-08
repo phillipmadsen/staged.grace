@@ -1,6 +1,15 @@
 <hr />
 <div class="row">
     <div class="form-group col-md-12">
+
+
+<div class="form-group col-md-4">
+{!! Form::file('image', null, array('class'=>'form-control', 'id' => 'image', 'value'=>Input::old('image'))) !!}
+</div>
+
+<div class="form-group col-md-4">
+{!! Form::file('images', null, array('class'=>'form-control', 'id' => 'images', 'value'=>Input::old('images'))) !!}
+</div>
              <!-- Office Status Field -->
         <div class="form-group col-md-4">
             {!! Form::label('office_status', 'Office Status:') !!}
@@ -82,11 +91,11 @@
 
         </div>
         <div class="col-md-4">
-          
-          
-          
+
+
+
           @include('backend.products.partials.productfeatures')
-          
+
         </div>
 
     </div>

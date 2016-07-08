@@ -80,23 +80,23 @@
         <br style="clear:both" />
         </div>
         <div id="panel_tab_image" class="tab-pane">
-        @include('backend.products.create-sections.image-fields')
+        {{--@include('backend.products.create-sections.image-fields')--}}
          <br style="clear:both" />
         </div>
         <div id="panel_tab_pricing" class="tab-pane">
-        @include('backend.products.create-sections.pricing-fields')
+        {{--@include('backend.products.create-sections.pricing-fields')--}}
          <br style="clear:both" />
         </div>
         <div id="panel_tab_meta" class="tab-pane">
-        @include('backend.products.create-sections.meta-fields')
+        {{--@include('backend.products.create-sections.meta-fields')--}}
          <br style="clear:both" />
         </div>
         <div id="panel_tab_additional" class="tab-pane">
-        @include('backend.products.create-sections.additional-fields')
+        {{--@include('backend.products.create-sections.additional-fields')--}}
          <br style="clear:both" />
         </div>
         <div id="panel_tab_developer" class="tab-pane">
-        @include('backend.products.create-sections.developer-fields')
+        {{--@include('backend.products.create-sections.developer-fields')--}}
          <br style="clear:both" />
         </div>
         <!-- Submit Field -->

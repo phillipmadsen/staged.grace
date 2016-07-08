@@ -155,7 +155,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-       // Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+        // Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
         DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
@@ -166,7 +166,7 @@ return [
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         \InfyOm\Generator\InfyOmGeneratorServiceProvider::class,
         \InfyOm\CoreTemplates\CoreTemplatesServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class
 
     ],
     /*
@@ -231,16 +231,16 @@ return [
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'Debugbar'            => Barryvdh\Debugbar\Facade::class,
         'Breadcrumbs'         => DaveJamesMiller\Breadcrumbs\Facade::class,
-        'Flash'               => Laracasts\Flash\Flash::class,
+
         'VideoApi'            => Sseffa\VideoApi\Facades\VideoApi::class,
         'Feeder'              => Fully\Feeder\Facade\Feeder::class,
         'Search'              => Fully\Search\Facade\Search::class,
         'Flash'               => Laracasts\Flash\Flash::class,
         'Menu'                => Caffeinated\Menus\Facades\Menu::class,
-            'Datatables'          => Yajra\Datatables\Facades\Datatables::class,
+        'Datatables'          => Yajra\Datatables\Facades\Datatables::class
 
         //
 
-    ],
+    ]
 
 ];

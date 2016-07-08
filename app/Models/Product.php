@@ -2,11 +2,11 @@
 
 namespace Fully\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
-
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 /**
  * @SWG\Definition(
@@ -383,23 +383,36 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      )
  * )
  */
+
+
 class Product extends Model implements SluggableInterface
 {
-
     use SluggableTrait;
     use SoftDeletes;
 
+    /**
+     * @var string
+     */
     public $table = 'products';
 
+    /**
+     * @var array
+     */
     protected $guarded = ['id'];
 
-
-
+    /**
+     * @var array
+     */
     protected $dates = ['deleted_at'];
 
-
+    /**
+     * @var array
+     */
     public $fillable = [
-        'slug', 'is_published', 'availability', 'manufacturer', 'product_line', 'status', 'office_status', 'guid', 'asin', 'model', 'sku', 'upc', 'mpn', 'name', 'subtitle', 'short_description', 'description', 'category', 'meta_title', 'meta_description', 'facebook_title', 'google_plus_title', 'twitter_title', 'price', 'promo_price', 'msrp_price', 'dealer_price', 'employee_price', 'sale_price', 'sale_price_coupon_code', 'sale_price_start_date', 'sale_price_end_date', 'quantity', 'tax_id', 'tax_status', 'tax_class', 'video_url', 'list_item_1', 'list_item_2', 'list_item_3', 'list_item_4', 'list_item_5', 'list_item_6', 'path', 'file_name', 'file_size', 'image_alt', 'primary_image_label', 'primary_image_file_size', 'primary_image', 'second_image_label', 'second_image_file_size', 'second_image', 'third_image_label', 'third_image_file_size', 'third_image', 'fourth_image_label', 'fourth_image_file_size', 'fourth_image', 'fifth_image_label', 'fifth_image_file_size', 'fifth_image', 'product_doc', 'product_doc_label', 'product_doc_file_size', 'tracking', 'datalayer', 'pubished_at', 'created_at', 'updated_at'
+        'slug', 'is_published', 'availability', 'manufacturer', 'product_line', 'status', 'office_status', 'guid', 'asin', 'model', 'sku', 'upc', 'mpn', 'name', 'subtitle', 'short_description', 'description', 'category', 'meta_title', 'meta_description', 'facebook_title', 'google_plus_title', 'twitter_title', 'price', 'promo_price', 'msrp_price', 'dealer_price', 'employee_price', 'sale_price', 'sale_price_coupon_code', 'sale_price_start_date', 'sale_price_end_date', 'quantity', 'tax_id', 'tax_status', 'tax_class', 'video_url', 'list_item_1', 'list_item_2', 'list_item_3', 'list_item_4', 'list_item_5', 'list_item_6', 'path', 'file_name', 'file_size', 'image_alt', 'primary_image_label', 'primary_image_file_size', 'primary_image', 'second_image_label', 'second_image_file_size', 'second_image', 'third_image_label', 'third_image_file_size', 'third_image', 'fourth_image_label', 'fourth_image_file_size', 'fourth_image', 'fifth_image_label', 'fifth_image_file_size', 'fifth_image', 'product_doc', 'product_doc_label', 'product_doc_file_size', 'tracking', 'datalayer', 'pubished_at', 'created_at', 'updated_at',    'images',
+        'image',
+        'product_image'
+
     ];
 
     /**
@@ -408,72 +421,76 @@ class Product extends Model implements SluggableInterface
      * @var array
      */
     protected $casts = [
-        'slug' => 'string',
-        'ispromo' => 'boolean',
-        'is_published' => 'boolean',
-        'availability' => 'string',
-        'manufacturer' => 'string',
-        'product_line' => 'string',
-        'status' => 'string',
-        'office_status' => 'string',
-        'guid' => 'string',
-        'asin' => 'string',
-        'model' => 'string',
-        'sku' => 'string',
-        'upc' => 'string',
-        'mpn' => 'string',
-        'name' => 'string',
-        'subtitle' => 'string',
-        'short_description' => 'string',
-        'description' => 'string',
-        'category' => 'string',
-        'meta_title' => 'string',
-        'meta_description' => 'string',
-        'facebook_title' => 'string',
-        'google_plus_title' => 'string',
-        'twitter_title' => 'string',
-        'price' => 'integer',
-        'promo_price' => 'integer',
-        'msrp_price' => 'integer',
-        'dealer_price' => 'integer',
-        'employee_price' => 'integer',
-        'sale_price' => 'integer',
-        'sale_price_coupon_code' => 'string',
-        'quantity' => 'integer',
-        'tax_id' => 'integer',
-        'tax_status' => 'string',
-        'tax_class' => 'string',
-        'video_url' => 'string',
-        'list_item_1' => 'string',
-        'list_item_2' => 'string',
-        'list_item_3' => 'string',
-        'list_item_4' => 'string',
-        'list_item_5' => 'string',
-        'list_item_6' => 'string',
-        'path' => 'string',
-        'file_name' => 'string',
-        'file_size' => 'integer',
-        'image_alt' => 'string',
-        'primary_image_label' => 'string',
+        'slug'                    => 'string',
+        'ispromo'                 => 'boolean',
+        'is_published'            => 'boolean',
+        'availability'            => 'string',
+        'manufacturer'            => 'string',
+        'product_line'            => 'string',
+        'status'                  => 'string',
+        'office_status'           => 'string',
+        'guid'                    => 'string',
+        'asin'                    => 'string',
+        'model'                   => 'string',
+        'sku'                     => 'string',
+        'upc'                     => 'string',
+        'mpn'                     => 'string',
+        'name'                    => 'string',
+        'subtitle'                => 'string',
+        'short_description'       => 'string',
+        'description'             => 'string',
+        'category'                => 'string',
+        'meta_title'              => 'string',
+        'meta_description'        => 'string',
+        'facebook_title'          => 'string',
+        'google_plus_title'       => 'string',
+        'twitter_title'           => 'string',
+        'price'                   => 'integer',
+        'promo_price'             => 'integer',
+        'msrp_price'              => 'integer',
+        'dealer_price'            => 'integer',
+        'employee_price'          => 'integer',
+        'sale_price'              => 'integer',
+        'sale_price_coupon_code'  => 'string',
+        'quantity'                => 'integer',
+        'tax_id'                  => 'integer',
+        'tax_status'              => 'string',
+        'tax_class'               => 'string',
+        'video_url'               => 'string',
+        'list_item_1'             => 'string',
+        'list_item_2'             => 'string',
+        'list_item_3'             => 'string',
+        'list_item_4'             => 'string',
+        'list_item_5'             => 'string',
+        'list_item_6'             => 'string',
+        'images'            => 'string',
+        'image'            => 'string',
+        'product_image'            => 'string',
+
+        'path'                    => 'string',
+        'file_name'               => 'string',
+        'file_size'               => 'integer',
+        'image_alt'               => 'string',
+        'primary_image_label'     => 'string',
         'primary_image_file_size' => 'integer',
-        'primary_image' => 'string',
-        'second_image_label' => 'string',
-        'second_image_file_size' => 'integer',
-        'second_image' => 'string',
-        'third_image_label' => 'string',
-        'third_image_file_size' => 'integer',
-        'third_image' => 'string',
-        'fourth_image_label' => 'string',
-        'fourth_image_file_size' => 'integer',
-        'fourth_image' => 'string',
-        'fifth_image_label' => 'string',
-        'fifth_image_file_size' => 'integer',
-        'fifth_image' => 'string',
-        'product_doc' => 'string',
-        'product_doc_label' => 'string',
-        'product_doc_file_size' => 'integer',
-        'tracking' => 'string',
-        'datalayer' => 'string'
+        'primary_image'           => 'string',
+        'second_image_label'      => 'string',
+        'second_image_file_size'  => 'integer',
+        'second_image'            => 'string',
+        'third_image_label'       => 'string',
+        'third_image_file_size'   => 'integer',
+        'third_image'             => 'string',
+        'fourth_image_label'      => 'string',
+        'fourth_image_file_size'  => 'integer',
+        'fourth_image'            => 'string',
+        'fifth_image_label'       => 'string',
+        'fifth_image_file_size'   => 'integer',
+        'fifth_image'             => 'string',
+        'product_doc'             => 'string',
+        'product_doc_label'       => 'string',
+        'product_doc_file_size'   => 'integer',
+        'tracking'                => 'string',
+        'datalayer'               => 'string'
     ];
 
     /**
@@ -483,142 +500,141 @@ class Product extends Model implements SluggableInterface
      */
     public static $rules = [
 
-        'name' => 'required',
-        'slug' => 'required'
+        'name' => 'required'
+
     ];
 
+    /**
+     * @var array
+     */
+    protected $sluggable = [
+        'build_from' => 'name',
+        'save_to'    => 'slug'
+    ];
 
-     protected $sluggable = array(
-         'build_from' => 'name',
-         'save_to' => 'slug',
-     );
-
-
+    /**
+     * @param $value
+     */
     public function setUrlAttribute($value)
     {
         $this->attributes['url'] = $value;
     }
-
-
 
     public function getUrlAttribute()
     {
         return 'shop/' . $this->attributes['slug'];
     }
 
+    /**
+     * @return mixed
+     */
     public function file()
     {
         return $this->belongsTo(File::class);
     }
 
+    /**
+     * @return mixed
+     */
+    public function category()
+    {
+        $categories = $this->hasOne(Category::class, 'id', 'category_id')->select(['id', 'title']);
 
+        return $categories;
+    }
 
-     public function category()
-     {
-         $categories = $this->hasOne(Category::class, 'id', 'category_id') ->select(['id', 'title']);
-
-         return $categories;
-     }
-
+    /**
+     * @return mixed
+     */
     public function variants()
     {
         return $this->hasMany(ProductVariant::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function features()
     {
         return $this->hasMany(ProductFeature::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function cat()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    /**
+     * @return mixed
+     */
     public function productVariants()
     {
         return $this->hasMany(ProductVariant::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function productFeatures()
     {
         return $this->hasMany(ProductVariant::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function salesOrderProduct()
     {
         return $this->hasMany(SaleorderProduct::class, 'product_id');
     }
 
-       public function invoiceProduct()
+    /**
+     * @return mixed
+     */
+    public function invoiceProduct()
     {
         return $this->hasMany(InvoiceProduct::class, 'product_id');
     }
 
-       public function images()
-    {
-        return $this->hasMany(Image::class, 'product_id');
-    }
+    // public function images()
+    // {
+    //     return $this->hasMany(Image::class, 'product_id');
+    // }
 
-           public function productImages()
-    {
-        return $this->hasMany(Image::class, 'product_id');
-    }
+    // public function productImages()
+    // {
+    //     return $this->hasMany(Image::class, 'product_id');
+    // }
 
+    /**
+     * @return mixed
+     */
     public function User()
     {
         return $this->belongsToMany(User::class);
     }
 
+    // /**
+    //  * @return mixed
+    //  */
+    // public function product_images()
+    // {
+    //     return $this->morphMany(ProductImage::class, 'imageable');
+    // }
 
+    // /**
+    //  * @return mixed
+    //  */
+    // public function images()
+    // {
+    //     return $this->morphMany(ProductImage::class, 'imageable');
+    // }
 
-
-
-	public function uploadThumbAndMainImage($request,$ProductId)
-    {
-      // get basic info
-        $s3 = Storage::disk('s3');
-        $file = $request->file('images');
-        $extension = $request->file('images')->guessExtension();
-        $filename = uniqid() . '.' . $extension;
-        $mimeType = $request->file('images')->getClientMimeType();
-        $fileSize = $request->file('images')->getClientSize();
-        $image = Image::make($file);
-
-        // generate the thumb and medium image
-        $imageThumb = Image::make($file)->fit(320)->crop(320, 240, 0, 0);
-        $imageThumb->encode($extension);
-
-        $imageMedium = Image::make($file)->resize(800, null, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-        $imageMedium->encode($extension);
-
-        $image->encode($extension);
-
-        // upload image to S3
-        $s3->put("images/{$userId}/main/" . $filename, (string) $image, 'public');
-        $s3->put("images/{$userId}/medium/" . $filename, (string) $imageMedium, 'public');
-        $s3->put("images/{$userId}/thumb/" . $filename, (string) $imageThumb, 'public');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public function images()
+	{
+	    return $this->hasMany(Fully\Models\ProductImage::class);
+	}
 }

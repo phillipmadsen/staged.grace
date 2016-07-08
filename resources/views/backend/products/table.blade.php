@@ -5,7 +5,7 @@
         <th>Category</th>
         <th>Office Status</th>
         <th>Price</th>
-        <th>Sale Price</th>
+
         <th>SKU</th>
         <th>MPN</th>
         <th colspan="3">Action</th>
@@ -19,9 +19,9 @@
             <td>{!! $product->category !!}</td>
             <td>{!! $product->office_status !!}</td>
             <td>{!! $product->price !!}</td>
-            <td>{!! $product->sale_price !!}</td>
+
             <td>{!! $product->sku !!}</td>
-                       <td>{!! $product->mpn !!}</td>
+            <td>{!! $product->mpn !!}</td>
 
             <td class="center">
                 <div class="visible-md visible-lg hidden-sm hidden-xs">
